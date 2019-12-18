@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Trans</title>
+  <style>
+    .bord
+    {
+      width:100%;
+      PADDIng:200px;
+      border: 2px solid black;
+      position: relative;
+
+    }
+
+    .trans 
+    {
+      width:60px;
+      height: 60px;
+      border:1px;
+      position: absolute;
+      background-color: red;
+      color:black;
+      text-align:center;
+      transition: width 2s, height 2s, transform 1s;
+      
+      
+    }
+
+
+    .trans:hover
+    {
+      width: 60px;
+      height: 60px;
+      transform: rotate(360deg);
+      background-color: aqua;
+  cursor:pointer;
+
+    }
+
+
+
+  </style>
+</head>
+<body>
+    <div class="bord">
+        <div class="trans">
+    </div>
+  </div>
+</body>
+</html>

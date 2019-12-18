@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>The XMLHttpRequest Object</h2>
+
+
+
+<p id="availableDates"></p>
+ 
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    var x = JSON.parse(this.responseText);
+    var dateArr = x.availableDatesList;
+    dateArr.forEach(function(items,index){
+        console.log(items,"   ",index);
+        if(items == '2019-12-31'){
+            //alert("date is available!!!");
+            console.log(items, "date is available!!!");
+            document.getElementById("availableDates").style.backgroundColor = "red";
+            //deliver mail..
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                // code for modern browsers
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Mail delivered");
+                }
+            };
+            xhttp.open("GET", 'http://localhost:3000/mailer', true);
+            xhttp.send();
+        }
+    })
+    document.getElementById("availableDates").innerHTML = JSON.stringify(x.availableDatesList);
+    
+    }
+  };
+  xhttp.open("POST", "https://sabarimalaonline.org/api/eDarshan/darshansummary/100001", true);
+  xhttp.send();
+}
+
+setInterval(function(){
+    document.getElementById("availableDates").innerHTML = "";
+    loadDoc();
+}, 10000);
+</script>
+
+</body>
+</html>
